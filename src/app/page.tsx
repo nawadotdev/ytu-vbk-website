@@ -14,7 +14,7 @@ const HeroSection = () => {
         <span className='text-6xl md:text-8xl'>everywhere</span>
       </div>
       {/* bottom middle, bouncing arrow */}
-      <div className='absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-vbk-primary font-bold text-2xl'>
+      <div className='absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-vbk-primary font-bold text-2xl'>
         <span>so we are</span>
         <ArrowDown className='w-10 h-10' />
       </div>
