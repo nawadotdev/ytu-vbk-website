@@ -2,6 +2,7 @@ import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import AboutCarousel from '@/components/Home/AboutCarousel'
+import EventsCarousel from '@/components/Home/EventsCarousel'
 
 const HeroSection = () => {
   {/* background hero.png */ }
@@ -64,12 +65,38 @@ const AboutSection = () => {
   )
 }
 
+const EventsSection = () => {
+  return (
+    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row mt-8">
+      <div className="w-full lg:w-2/5 space-y-4">
+        <h2 className="text-4xl font-semibold text-vbk-primary">Etkinlikler</h2>
+        <div className="space-y-4 font-medium">
+          <p>
+            Veri Bilimi Kulübü olarak, üyelerimizin hem bilgi hem de deneyim kazanmalarını sağlayacak çeşitli etkinlikler düzenliyoruz. Düzenlediğimiz etkinlikler arasında; atölyeler, seminerler, hackathonlar, proje geliştirme oturumları ve teknik eğitimler bulunur.
+          </p>
+          <p>
+            Atölyelerde Python, R, SQL gibi programlama dilleri ve veri analizi araçlarının kullanımı öğretilirken, seminerlerde sektörden uzmanlar deneyimlerini ve güncel trendleri paylaşır. Hackathonlar ve proje geliştirme oturumları, üyelerin öğrendiklerini pratiğe dökerek gerçek veri setleri üzerinde çözüm üretmelerini sağlar.
+          </p>
+          <p>
+            Ayrıca, kulüp olarak sosyal etkinlikler ve networking fırsatları da sunarak, üyelerin farklı disiplinlerden öğrencilerle iletişim kurmalarını ve veri bilimi ekosistemine adım atmalarını destekliyoruz.
+          </p>
+        </div>
+      </div>
+
+      <div className="w-full lg:w-2/5">
+        <EventsCarousel />
+      </div>
+    </section>
+  )
+}
+
 const Home = () => {
   return (
     <div>
       <HeroSection />
       <TeamImageSection />
       <AboutSection />
+      <EventsSection />
     </div>
   )
 }
