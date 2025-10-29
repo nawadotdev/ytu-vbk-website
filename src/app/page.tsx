@@ -40,12 +40,12 @@ const TeamImageSection = () => {
 
 const AboutSection = () => {
   return (
-    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 md:flex-row mt-8">
-      <div className="w-full md:w-1/3">
+    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row mt-8">
+      <div className="w-full lg:w-2/5">
         <AboutCarousel />
       </div>
 
-      <div className="w-full md:w-1/3 space-y-4">
+      <div className="w-full lg:w-2/5 space-y-4">
         <h2 className="text-4xl font-semibold text-vbk-primary">Hakkımızda</h2>
         <div className="space-y-4 font-medium">
           <p>
