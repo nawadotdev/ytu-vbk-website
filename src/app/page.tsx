@@ -5,6 +5,7 @@ import AboutCarousel from '@/components/Home/AboutCarousel'
 import EventsCarousel from '@/components/Home/EventsCarousel'
 import EducationCarousel from '@/components/Home/EducationCarousel'
 import BlogCarousel from '@/components/Home/BlogCarousel'
+import TeamCarousel from '@/components/Home/TeamCarousel'
 
 const HeroSection = () => {
   {/* background hero.png */ }
@@ -143,6 +144,32 @@ const BlogSection = () => {
   )
 }
 
+const TeamSection = () => {
+  return (
+    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
+      <div className="w-full lg:w-2/5">
+        <TeamCarousel />
+      </div>
+
+      <div className="w-full lg:w-2/5 space-y-4">
+        <h2 className="text-4xl font-semibold text-vbk-primary">Ekibimiz</h2>
+        <div className="space-y-4 font-medium">
+          <p>
+            Veri Bilimi Kulübü’nün ekibi, farklı disiplinlerden gelen, veri bilimine tutkulu ve üretken öğrencilerden oluşur. Ekibimiz; başkan, başkan yardımcıları, eğitim sorumluları, etkinlik koordinatörleri ve iletişim ekiplerinden oluşarak kulübün tüm faaliyetlerini organize eder.
+          </p>
+          <p>
+            Her bir ekip üyesi, kulüp etkinliklerinin planlanması, eğitimlerin hazırlanması, projelerin yürütülmesi ve üyeler arası iletişimin sağlanmasında aktif rol alır. Ekibimiz, iş birliği ve paylaşım kültürünü benimseyerek, hem kulübün hem de üyelerimizin gelişimine katkıda bulunur.
+          </p>
+          <p>
+            Amacımız, güçlü bir ekip yapısı ile üyelerimize destek olmak, veri bilimi alanında yetkin bireyler yetiştirmek ve kulübü sürekli olarak ileriye taşımaktır.
+          </p>
+        </div>
+      </div>
+
+    </section>
+  )
+}
+
 const Home = () => {
   return (
     <div>
@@ -152,6 +179,7 @@ const Home = () => {
       <EventsSection />
       <EducationSection />
       <BlogSection />
+      <TeamSection />
     </div>
   )
 }
