@@ -25,7 +25,7 @@ export default function Navbar() {
     return (
         <nav className="flex justify-between items-center w-full bg-background backdrop-blur-[50px] font-bold lg:px-24 md:px-12 px-6 md:py-6 py-4 h-16">
             {/* logo */}
-            <div className='relative w-12 h-12'>
+            <div className='relative h-36 w-36'>
                 <Link href="/">
                     <Image
                         src="/logo.png"
