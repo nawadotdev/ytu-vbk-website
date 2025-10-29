@@ -31,6 +31,13 @@ export default function Navbar() {
                         src="/logo.png"
                         alt='VBK Logo'
                         fill
+                        className='hidden md:block'
+                    />
+                    <Image
+                        src="/logo-mobile.png"
+                        alt='VBK Logo Mobile'
+                        fill
+                        className='block md:hidden'
                     />
                 </Link>
             </div>
