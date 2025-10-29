@@ -1,6 +1,7 @@
 import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import AboutCarousel from '@/components/Home/AboutCarousel'
 
 const HeroSection = () => {
   {/* background hero.png */ }
@@ -37,11 +38,38 @@ const TeamImageSection = () => {
   )
 }
 
+const AboutSection = () => {
+  return (
+    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 md:flex-row mt-8">
+      <div className="w-full md:w-1/3">
+        <AboutCarousel />
+      </div>
+
+      <div className="w-full md:w-1/3 space-y-4">
+        <h2 className="text-4xl font-semibold text-vbk-primary">Hakkımızda</h2>
+        <div className="space-y-4 font-medium">
+          <p>
+            Yıldız Teknik Üniversitesi Veri Bilimi Kulübü, veri odaklı çözüm üretmeyi, analitik düşünmeyi ve teknolojiyi bir araya getiren bir topluluktur. Amacımız, öğrencilerin veri bilimi alanında bilgi ve yetkinliklerini geliştirmelerini sağlamak, projeler ve atölyeler aracılığıyla teoriyi pratiğe dönüştürmelerine destek olmaktır.
+          </p>
+          <p>
+            Kulüp olarak makine öğrenmesi, yapay zeka, istatistik, veri görselleştirme ve programlama gibi alanlarda etkinlikler düzenliyoruz. Topluluğumuz, farklı disiplinlerden gelen öğrencilerin bir araya gelerek deneyim paylaşabilecekleri, öğrenebilecekleri ve birlikte projeler üretebilecekleri bir platform sunar.
+          </p>
+          <p>
+            Biz, meraklı, üretken ve iş birliğine açık bireylerden oluşan bir aileyiz. Amacımız sadece bilgi paylaşmak değil; aynı zamanda veri biliminin gerçek dünya problemlerine uygulanabilir çözümler geliştirme gücünü göstermek ve üyelerimizi bu süreçte yetkin bireyler olarak yetiştirmektir.
+          </p>
+        </div>
+      </div>
+
+    </section>
+  )
+}
+
 const Home = () => {
   return (
     <div>
       <HeroSection />
       <TeamImageSection />
+      <AboutSection />
     </div>
   )
 }
