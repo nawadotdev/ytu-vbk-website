@@ -4,6 +4,7 @@ import React from 'react'
 import AboutCarousel from '@/components/Home/AboutCarousel'
 import EventsCarousel from '@/components/Home/EventsCarousel'
 import EducationCarousel from '@/components/Home/EducationCarousel'
+import BlogCarousel from '@/components/Home/BlogCarousel'
 
 const HeroSection = () => {
   {/* background hero.png */ }
@@ -117,6 +118,31 @@ const EducationSection = () => {
   )
 }
 
+const BlogSection = () => {
+  return (
+    <section className="flex flex-col items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
+      <div className="w-full lg:w-2/5 space-y-4">
+        <h2 className="text-4xl font-semibold text-vbk-primary">VBK Blog</h2>
+        <div className="space-y-4 font-medium">
+          <p>
+            Veri Bilimi Kulübü olarak, bilgi paylaşımını ve güncel gelişmeleri takip etmeyi önemsiyoruz. VBK Blog, üyelerimizin öğrendiklerini, projelerini ve veri bilimi dünyasındaki yenilikleri paylaştığı bir platformdur.
+          </p>
+          <p>
+            Blogda; veri analizi ipuçları, makine öğrenmesi uygulamaları, sektör trendleri, etkinlik özetleri ve eğitim materyalleri yer alır. Üyelerimiz kendi deneyimlerini ve projelerini paylaşarak hem öğrenir hem de topluluğun bilgi birikimine katkıda bulunur.
+          </p>
+          <p>
+            VBK Blog, veri bilimi meraklıları için ilham verici içerikler sunarken, kulüp üyelerinin yazma ve sunum becerilerini geliştirmelerine de olanak sağlar.
+          </p>
+        </div>
+      </div>
+
+      <div className="w-full lg:w-2/5">
+        <BlogCarousel />
+      </div>
+    </section>
+  )
+}
+
 const Home = () => {
   return (
     <div>
@@ -125,6 +151,7 @@ const Home = () => {
       <AboutSection />
       <EventsSection />
       <EducationSection />
+      <BlogSection />
     </div>
   )
 }
