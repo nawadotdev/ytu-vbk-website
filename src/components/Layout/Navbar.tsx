@@ -23,17 +23,17 @@ const NavItem = ({ label, href }: { label: string, href: string }) => {
 
 export default function Navbar() {
     return (
-        <nav className="flex justify-between items-center w-full bg-background backdrop-blur-[50px] font-bold lg:px-24 md:px-12 px-6 md:py-6 py-4">
+        <nav className="flex justify-between items-center w-full bg-background backdrop-blur-[50px] font-bold lg:px-24 md:px-12 px-6 md:py-6 py-4 h-16">
             {/* logo */}
-            <Link href="/">
-                <Image 
-                    src="/logo.png"
-                    alt="VBK Logo"
-                    width={48}
-                    height={48}
-                    className='w-12 h-12'
-                />
-            </Link>
+            <div className='relative w-12 h-12'>
+                <Link href="/">
+                    <Image
+                        src="/logo.png"
+                        alt='VBK Logo'
+                        fill
+                    />
+                </Link>
+            </div>
             {/* nav items */}
             {/* desktop nav items */}
             <div className="hidden md:flex items-center gap-11">
