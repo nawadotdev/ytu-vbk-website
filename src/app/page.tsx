@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import AboutCarousel from '@/components/Home/AboutCarousel'
 import EventsCarousel from '@/components/Home/EventsCarousel'
+import EducationCarousel from '@/components/Home/EducationCarousel'
 
 const HeroSection = () => {
   {/* background hero.png */ }
@@ -67,7 +68,7 @@ const AboutSection = () => {
 
 const EventsSection = () => {
   return (
-    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row mt-8">
+    <section className="flex flex-col items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
       <div className="w-full lg:w-2/5 space-y-4">
         <h2 className="text-4xl font-semibold text-vbk-primary">Etkinlikler</h2>
         <div className="space-y-4 font-medium">
@@ -90,6 +91,32 @@ const EventsSection = () => {
   )
 }
 
+const EducationSection = () => {
+  return (
+    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
+      <div className="w-full lg:w-2/5">
+        <EducationCarousel />
+      </div>
+
+      <div className="w-full lg:w-2/5 space-y-4">
+        <h2 className="text-4xl font-semibold text-vbk-primary">Eğitimler</h2>
+        <div className="space-y-4 font-medium">
+          <p>
+            Yıldız Teknik Üniversitesi Veri Bilimi Kulübü olarak, üyelerimizin veri bilimi alanında güçlü bir temel oluşturmasını sağlamak amacıyla düzenli eğitim programları sunuyoruz. Eğitimlerimiz; veri analizi, makine öğrenmesi, yapay zeka, istatistik ve veri görselleştirme gibi temel konuları kapsar.
+          </p>
+          <p>
+            Programlarımız, hem teorik bilgiyi hem de pratik uygulamayı içerir. Üyelerimiz Python, R, SQL gibi veri bilimi araçlarını öğrenirken, gerçek veri setleri üzerinde projeler geliştirerek öğrendiklerini pekiştirir. Ayrıca ileri seviye eğitimlerde derin öğrenme, doğal dil işleme ve büyük veri analitiği gibi alanlara da değinilir.
+          </p>
+          <p>
+            Eğitimler, hem bireysel öğrenmeyi hem de ekip çalışmasını teşvik ederek, öğrencilerin veri bilimi yetkinliklerini profesyonel düzeye taşımalarını hedefler.
+          </p>
+        </div>
+      </div>
+
+    </section>
+  )
+}
+
 const Home = () => {
   return (
     <div>
@@ -97,6 +124,7 @@ const Home = () => {
       <TeamImageSection />
       <AboutSection />
       <EventsSection />
+      <EducationSection />
     </div>
   )
 }
