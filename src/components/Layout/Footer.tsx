@@ -20,7 +20,7 @@ export default function Footer() {
       </a>
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center  ">
           <div className="space-y-4 min-w-0 text-center sm:text-left">
             <Link href="/" aria-label="YTÜ VBK Ana Sayfa" className="inline-flex items-center gap-3">
               <div className="relative h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 shrink-0">
