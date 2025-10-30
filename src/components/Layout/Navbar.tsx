@@ -1,10 +1,11 @@
 import { ChevronDown, MenuIcon } from 'lucide-react'
 import Link from 'next/link'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 
 const NavItems: { label: string, href: string }[] = [
+    { label: "Ana Sayfa", href: "/" },
     { label: "Etkinlikler", href: "/etkinlikler" },
     { label: "Eğitimler", href: "/egitimler" },
     { label: "Mezun Portföyü", href: "/mezun-portfoyu" },
@@ -43,16 +44,10 @@ export default function Navbar() {
             </div>
             {/* nav items */}
             {/* desktop nav items */}
-            <div className="hidden md:flex items-center gap-11">
-                {NavItems.slice(0, 4).map((item) => (
+            <div className="hidden md:flex flex-wrap justify-center gap-x-8 max-w-xl">
+                {NavItems.map((item) => (
                     <NavItem key={item.href} label={item.label} href={item.href} />
                 ))}
-                {/* tablet nav items */}
-                <div className="hidden lg:flex items-center gap-11">
-                    {NavItems.slice(4, NavItems.length).map((item) => (
-                        <NavItem key={item.href} label={item.label} href={item.href} />
-                    ))}
-                </div>
             </div>
             {/* language selector */}
             <div className="hidden items-center gap-1 md:block">
@@ -71,6 +66,10 @@ export default function Navbar() {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end' className='md:hidden'>
+                        <DropdownMenuItem key="anasayfa">
+                            <NavItem label="Ana Sayfa" href="/" />
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
                         {NavItems.map((item) => (
                             <DropdownMenuItem key={item.href}>
                                 <NavItem label={item.label} href={item.href} />
