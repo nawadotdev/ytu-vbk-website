@@ -24,7 +24,7 @@ const NavItem = ({ label, href }: { label: string, href: string }) => {
 
 export default function Navbar() {
     return (
-        <nav className="flex justify-between items-center w-full bg-background backdrop-blur-[50px] font-bold lg:px-24 md:px-12 px-6 md:py-6 py-4 h-16">
+        <nav className="flex justify-between items-center w-full bg-background backdrop-blur-[50px] font-bold lg:px-24 md:px-12 px-6 md:py-6 py-4 h-16 md:h-20">
             {/* logo */}
             <div className='relative h-36 w-36'>
                 <Link href="/">
