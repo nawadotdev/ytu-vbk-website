@@ -16,9 +16,29 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YTU | VBK",
-  description: "Yıldız Teknik Üniversitesi Veri Bilimi Kulübü",
+  metadataBase: new URL("https://vbk.yildiz.edu.tr"),
+  title: {
+    default: "YTÜ Veri Bilimi Kulübü (VBK)",
+    template: "%s | YTÜ VBK",
+  },
+  description: "YTÜ Veri Bilimi Kulübü resmi web sitesi.",
+  openGraph: {
+    type: "website",
+    siteName: "YTÜ VBK",
+    images: ["/og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@veribilimiytu",
+    images: ["/og.png"],
+  },
+  alternates: {
+    canonical: "https://vbk.yildiz.edu.tr",
+    languages: { tr: "/", en: "/en" },
+  },
+  icons: { icon: "/favicon.ico" },
 };
+
 
 export default function RootLayout({
   children,
