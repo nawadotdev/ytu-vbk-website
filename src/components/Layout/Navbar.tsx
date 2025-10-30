@@ -44,7 +44,7 @@ export default function Navbar() {
             </div>
             {/* nav items */}
             {/* desktop nav items */}
-            <div className="hidden md:flex flex-wrap justify-center gap-x-8 max-w-xl">
+            <div className="hidden md:flex flex-wrap justify-center gap-x-12 gap-y-1 max-w-xl">
                 {NavItems.map((item) => (
                     <NavItem key={item.href} label={item.label} href={item.href} />
                 ))}
