@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "YTÜ VBK",
+    url: "https://vbk.yildiz.edu.tr/",
+    locale: "tr_TR",
     images: ["/og.png"],
   },
   twitter: {
@@ -51,7 +53,9 @@ export default function RootLayout({
         className={`${plusJakartaSans.variable} ${ibmPlexMono.variable} antialiased`}
       >
         <Navbar />
-        {children}
+        <main id="main">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

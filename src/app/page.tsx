@@ -6,23 +6,48 @@ import EventsCarousel from '@/components/Home/EventsCarousel'
 import EducationCarousel from '@/components/Home/EducationCarousel'
 import BlogCarousel from '@/components/Home/BlogCarousel'
 import TeamCarousel from '@/components/Home/TeamCarousel'
+import { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: "Veri Bilimi | YTÜ VBK",
+  description: "YTÜ Veri Bilimi Kulübü: etkinlikler, eğitimler ve projelerle veri bilimi topluluğu.",
+  openGraph: {
+    title: "Veri Bilimi | YTÜ Veri Bilimi Kulübü",
+    description: "Etkinlikler, eğitimler, blog yazıları ve topluluk projeleriyle veri bilimine adım atın.",
+    url: "https://vbk.yildiz.edu.tr/",
+    locale: "tr_TR",
+    images: ["/og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@veribilimiytu",
+    images: ["/og.png"],
+  },
+  alternates: {
+    canonical: "https://vbk.yildiz.edu.tr",
+  },
+};
+
+
 
 const HeroSection = () => {
   {/* background hero.png */ }
   return (
     <section className='relative h-[calc(100vh-4rem)] max-w-[100vw]'>
+      <h1 className="sr-only">Veri Bilimi</h1>
       {/* responsive image */}
-      <Image src="/hero.png" alt="Hero" fill className='object-cover -z-10' />
+      <Image src="/hero.png" alt="YTÜ Veri Bilimi Kulübü ana görseli" fill className='object-cover -z-10' priority sizes='100vw' />
       {/* in the middle of the image */}
       <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold font-ibm-plex-mono z-50 flex flex-col items-start'>
         <span>data is</span>
         <span className='text-6xl md:text-8xl'>everywhere</span>
       </div>
       {/* bottom middle, bouncing arrow */}
-      <div className='absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-vbk-primary font-bold text-2xl'>
+      <a href="#about" className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-vbk-primary font-bold text-2xl">
         <span>so we are</span>
         <ArrowDown className='w-10 h-10' />
-      </div>
+      </a>
     </section>
   )
 }
@@ -30,7 +55,7 @@ const HeroSection = () => {
 const TeamImageSection = () => {
   return (
     <section className='relative'>
-      <Image src="/vbk-team-image.png" alt="Team" width={1728} height={972} />
+      <Image src="/vbk-team-image.png" alt="YTÜ VBK ekip fotoğrafı" width={1728} height={972} loading='lazy' />
       {/* left bottom text */}
       <div className='absolute bottom-4 left-4 md:bottom-8 md:left-8 font-semibold font-ibm-plex-mono z-50 flex items-start gap-2 md:text-xl'>
         <span>from</span>
@@ -44,7 +69,7 @@ const TeamImageSection = () => {
 
 const AboutSection = () => {
   return (
-    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row mt-8">
+    <section id="about" className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row mt-8">
       <div className="w-full lg:w-2/5">
         <AboutCarousel />
       </div>
@@ -70,7 +95,7 @@ const AboutSection = () => {
 
 const EventsSection = () => {
   return (
-    <section className="flex flex-col items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
+    <section id="events" className="flex flex-col items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
       <div className="w-full lg:w-2/5 space-y-4">
         <h2 className="text-4xl font-semibold text-vbk-primary">Etkinlikler</h2>
         <div className="space-y-4 font-medium">
@@ -82,6 +107,9 @@ const EventsSection = () => {
           </p>
           <p>
             Ayrıca, kulüp olarak sosyal etkinlikler ve networking fırsatları da sunarak, üyelerin farklı disiplinlerden öğrencilerle iletişim kurmalarını ve veri bilimi ekosistemine adım atmalarını destekliyoruz.
+          </p>
+          <p>
+            Tüm etkinlikleri görmek için <Link href="/etkinlikler" className="underline">etkinlikler sayfasını</Link> ziyaret edin.
           </p>
         </div>
       </div>
@@ -95,7 +123,7 @@ const EventsSection = () => {
 
 const EducationSection = () => {
   return (
-    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
+    <section id="education" className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
       <div className="w-full lg:w-2/5">
         <EducationCarousel />
       </div>
@@ -112,6 +140,9 @@ const EducationSection = () => {
           <p>
             Eğitimler, hem bireysel öğrenmeyi hem de ekip çalışmasını teşvik ederek, öğrencilerin veri bilimi yetkinliklerini profesyonel düzeye taşımalarını hedefler.
           </p>
+          <p>
+            Tüm eğitimleri görmek için <Link href="/egitimler" className="underline">eğitimler sayfasını</Link> ziyaret edin.
+          </p>
         </div>
       </div>
 
@@ -121,7 +152,7 @@ const EducationSection = () => {
 
 const BlogSection = () => {
   return (
-    <section className="flex flex-col items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
+    <section id="blog" className="flex flex-col items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
       <div className="w-full lg:w-2/5 space-y-4">
         <h2 className="text-4xl font-semibold text-vbk-primary">VBK Blog</h2>
         <div className="space-y-4 font-medium">
@@ -133,6 +164,9 @@ const BlogSection = () => {
           </p>
           <p>
             VBK Blog, veri bilimi meraklıları için ilham verici içerikler sunarken, kulüp üyelerinin yazma ve sunum becerilerini geliştirmelerine de olanak sağlar.
+          </p>
+          <p>
+            Tüm blog yazılarını görmek için <Link href="/blog" className="underline">blog sayfasını</Link> ziyaret edin.
           </p>
         </div>
       </div>
@@ -146,7 +180,7 @@ const BlogSection = () => {
 
 const TeamSection = () => {
   return (
-    <section className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
+    <section id="team" className="flex flex-col-reverse items-center justify-center py-16 gap-16 w-screen px-4 lg:flex-row">
       <div className="w-full lg:w-2/5">
         <TeamCarousel />
       </div>
@@ -171,8 +205,32 @@ const TeamSection = () => {
 }
 
 const Home = () => {
+  const org = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "YTÜ Veri Bilimi Kulübü",
+    "url": "https://vbk.yildiz.edu.tr",
+    "logo": "https://vbk.yildiz.edu.tr/og.png",
+    "sameAs": [
+      "https://x.com/veribilimiytu",
+      "https://www.instagram.com/veribilimiytu"
+    ]
+  };
+  const site = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "YTÜ VBK",
+    "url": "https://vbk.yildiz.edu.tr",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://vbk.yildiz.edu.tr/search?q={query}",
+      "query-input": "required name=query"
+    }
+  };
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(org) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(site) }} />
       <HeroSection />
       <TeamImageSection />
       <AboutSection />
