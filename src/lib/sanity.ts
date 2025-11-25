@@ -99,6 +99,7 @@ export const getMoreBlogs = async (
             _createdAt desc
           )[0...${limit}]
         {
+          _id,
           title,
           slug,
           coverImage,
@@ -126,6 +127,7 @@ export const getMoreBlogs = async (
           category._ref == $categoryId
         ]
         | order(_createdAt desc)[0...${limit}]{
+          _id,
           title,
           slug,
           coverImage,
@@ -152,6 +154,7 @@ export const getMoreBlogs = async (
           count((tags[]->slug.current)[@ in $tags]) > 0
         ]
         | order(_createdAt desc)[0...${limit}]{
+          _id,
           title,
           slug,
           coverImage,
@@ -176,6 +179,7 @@ export const getMoreBlogs = async (
         language == $language
       ]
       | order(_createdAt desc)[0...${limit}]{
+        _id,
         title,
         slug,
         coverImage,
@@ -191,4 +195,13 @@ export const getMoreBlogs = async (
       limit,
     });
   };
-  
+
+  export const getBlogsForSitemap = async () => {
+    const query = groq`
+      *[_type == "blog"] {
+        slug,
+        publishedAt
+      }
+    `;
+    return sanityClient.fetch(query);
+  };

@@ -1,7 +1,9 @@
+import { getBlogsForSitemap } from '@/lib/sanity';
 import type { MetadataRoute } from 'next'
+import { SanityBlog } from '@/types/SanityBlog.type';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://vbk.yildiz.edu.tr'
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = process.env.NEXT_PUBLIC_MAIN_DOMAIN?.replace(/\/$/, "");
 
   const routes = [
     '',
@@ -11,16 +13,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog',
     '/mezun-portfoyu',
     '/iletisim',
-  ]
+  ];
 
-  const now = new Date()
+  const blogs = await getBlogsForSitemap();
 
-  return routes.map((route) => ({
+  const staticPages = routes.map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: now,
+    lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: route === '' ? 1 : 0.7,
-  }))
+  }));
+
+  const blogPages = blogs.map((post: SanityBlog) => ({
+    url: `${baseUrl}/blog/${post.slug.current}`,
+    lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...blogPages];
 }
-
-

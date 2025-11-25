@@ -23,4 +23,5 @@ export type SanityBlog = {
   author: SanityAuthor;
   content: PortableTextBlock[];
   tags: string[];
+  publishedAt: string;
 };

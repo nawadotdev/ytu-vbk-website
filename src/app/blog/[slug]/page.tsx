@@ -15,6 +15,60 @@ import Link from 'next/link';
 
 const language = "TR";
 
+export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getBlogBySlug(slug);
+
+  const mainDomain = process.env.NEXT_PUBLIC_MAIN_DOMAIN;
+
+  const imageUrl = sanityUrlFor(post.coverImage).width(1600).height(840).quality(80).auto('format').url();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": imageUrl,
+    "author": {
+      "@type": "Person",
+      "name": post.author?.name
+    },
+    "datePublished": post.publishedAt,
+    "dateModified": post.publishedAt,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${mainDomain}/blog/${post.slug.current}`
+    }
+  };
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      images: [
+        imageUrl
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: `${mainDomain}/blog/${post.slug.current}`,
+    },
+    other: {
+      "script:ld+json": JSON.stringify(jsonLd)
+    }
+  };
+}
+
 const SuggestedBlogCard = ({ blog }: { blog: SanityBlog }) => {
   return (
     <Link
@@ -23,8 +77,8 @@ const SuggestedBlogCard = ({ blog }: { blog: SanityBlog }) => {
     >
       <div className="relative w-full aspect-video">
         <Image
-          src={sanityUrlFor(blog.coverImage).width(900).height(500).url()}
-          alt={blog.title}
+          src={sanityUrlFor(blog.coverImage).width(900).height(500).quality(80).auto('format').url()}
+          alt={`${blog.title} blog görseli`}
           fill
           className="object-cover"
         />
@@ -127,10 +181,17 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
         {post.coverImage && (
           <Image
-            src={sanityUrlFor(post.coverImage).url()}
+            src={sanityUrlFor(post.coverImage)
+              .width(1600)
+              .height(840)
+              .quality(80)
+              .auto("format")
+              .url()}
             alt={post.title}
-            width={1200}
-            height={600}
+            width={1600}
+            height={840}
+            priority
+            sizes="100vw"
             className="rounded-xl object-cover w-full border"
           />
         )}
