@@ -7,8 +7,8 @@ import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
 import { PortableText } from 'next-sanity';
 import { portableComponents } from '@/components/Sanity/portableComponents';
-import Link from 'next/link';
 import ShareButtons from '@/components/Post/ShareButtons';
+import PostBreadcrumb from '@/components/Post/Breadcrumb';
 
 const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
@@ -16,7 +16,7 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 space-y-10">
-      <div><Link href="/blog" className='text-sm text-muted-foreground underline'>← Bloglara Dön</Link></div>
+      <PostBreadcrumb title={post.title} groupName="Blog" />
       <div className="space-y-4">
         <Badge variant="secondary" className="text-sm">
           {post.category.title}
