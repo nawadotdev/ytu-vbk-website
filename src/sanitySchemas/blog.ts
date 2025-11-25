@@ -1,9 +1,19 @@
 import { defineType, defineField } from "sanity";
-
 import author from "./author";
-import blogCategory from "./blogCategory";
 
-export default defineType({
+export const BlogCategory = defineType({
+  name: "blogCategory",
+  title: "Blog Categories",
+  type: "document",
+  fields: [
+    defineField({ name: "title", title: "Title", type: "string" }),
+    defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" } }),
+    defineField({ name: "description", title: "Description", type: "text" }),
+  ],
+});
+
+
+export const Blog = defineType({
   name: "blog",
   title: "Blog Posts",
   type: "document",
@@ -25,7 +35,7 @@ export default defineType({
       name: "category",
       title: "Category",
       type: "reference",
-      to: [blogCategory],
+      to: [BlogCategory],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -69,7 +79,7 @@ export default defineType({
       name: "language",
       title: "Language",
       type: "string",
-      options: { list: ["TR", "EN"] },
+      options: { list: ["Tr", "En"] },
       validation: (Rule) => Rule.required(),
     }),
   ],

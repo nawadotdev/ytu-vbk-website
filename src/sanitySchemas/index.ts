@@ -1,7 +1,7 @@
 import author from './author'
-import blog from './blog'
-import blogCategory from './blogCategory'
+import { Blog } from './blog'
+import { BlogCategory } from './blog'
 
-const schemas = [author, blog, blogCategory]
+const schemas = [author, Blog, BlogCategory]
 
 export default schemas

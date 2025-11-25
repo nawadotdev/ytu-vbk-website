@@ -44,3 +44,30 @@ export const getBlogBySlug = async (slug: string) => {
     return blog;
 
 }
+
+export const getBlogs = async (language: string) => {
+    const query = groq`
+        *[_type == "blog" && language == $language] | order(publishedAt desc) {
+            _id,
+            title,
+            slug,
+            coverImage,
+            excerpt,
+            publishedAt,
+            author -> {
+                name,
+                title,
+                avatar,
+                bio,
+            },
+            category -> {
+                title,
+                slug,
+                description,
+            },
+            tags,
+            language,
+        }`;
+    const blogs = await sanityClient.fetch(query, { language });
+    return blogs;
+}
