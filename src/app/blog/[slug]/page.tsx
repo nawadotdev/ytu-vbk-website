@@ -9,10 +9,13 @@ import { PortableText } from 'next-sanity';
 import { portableComponents } from '@/components/Sanity/portableComponents';
 import ShareButtons from '@/components/Post/ShareButtons';
 import PostBreadcrumb from '@/components/Post/Breadcrumb';
+import { calculateReadingTime } from '@/lib/utils';
 
 const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const post = await getBlogBySlug(slug);
+
+  const { minutes } = calculateReadingTime(post.content);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 space-y-10">
@@ -32,7 +35,7 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
           </p>
         )}
 
-        <div className='flex justify-between'>
+        <div className='flex justify-between items-center'>
           <div className="flex items-center gap-3 pt-3">
             <Avatar className="h-10 w-10">
               <AvatarImage src={sanityUrlFor(post.author?.avatar).url()} />
@@ -45,6 +48,9 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 {new Date(post.publishedAt).toLocaleDateString("tr-TR")}
               </p>
             </div>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='text-sm text-muted-foreground'>{minutes} dakika okuma süresi</p>
           </div>
           <div className='flex items-center gap-2'>
             <p className='text-sm text-muted-foreground'>Paylaş:</p>

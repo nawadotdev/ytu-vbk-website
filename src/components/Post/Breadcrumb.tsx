@@ -15,7 +15,7 @@ const PostBreadcrumb = async ({ title, groupName }: { title: string, groupName?:
                     </BreadcrumbItem>
                 )}
                 <BreadcrumbSeparator />
-                <BreadcrumbItem>
+                <BreadcrumbItem className='font-bold'>
                     {title}
                 </BreadcrumbItem>
             </BreadcrumbList>
