@@ -22,4 +22,5 @@ export type SanityBlog = {
   coverImage: Image;
   author: SanityAuthor;
   content: PortableTextBlock[];
+  tags: string[];
 };

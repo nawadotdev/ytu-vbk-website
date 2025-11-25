@@ -4,15 +4,15 @@ import imageUrlBuilder from "@sanity/image-url";
 import { Image } from "sanity";
 
 export const sanityClient = createClient({
-  projectId: "otmr34tv",
-  dataset: "production",
-  apiVersion: "2025-11-25",
-  useCdn: true,
+    projectId: "otmr34tv",
+    dataset: "production",
+    apiVersion: "2025-11-25",
+    useCdn: true,
 });
 
 export function sanityUrlFor(source: Image) {
     return imageUrlBuilder(sanityClient).image(source);
-  }
+}
 
 export const getBlogBySlug = async (slug: string) => {
 
@@ -71,3 +71,124 @@ export const getBlogs = async (language: string) => {
     const blogs = await sanityClient.fetch(query, { language });
     return blogs;
 }
+
+export const getMoreBlogs = async (
+    language: string,
+    slug: string,
+    categoryId?: string,
+    tags?: string[],
+    limit: number = 4
+  ) => {
+    const hasCategory = Boolean(categoryId);
+    const hasTags = tags && tags.length > 0;
+  
+    if (hasCategory && hasTags) {
+      const query = groq`
+        *[
+          _type == "blog" &&
+          slug.current != $slug &&
+          language == $language &&
+          (
+            category._ref == $categoryId ||
+            count((tags[]->slug.current)[@ in $tags]) > 0
+          )
+        ]
+        | order(
+            (category._ref == $categoryId) desc,
+            count((tags[]->slug.current)[@ in $tags]) desc,
+            _createdAt desc
+          )[0...${limit}]
+        {
+          title,
+          slug,
+          coverImage,
+          excerpt,
+          category->{ title },
+          tags[]->{ title, slug }
+        }
+      `;
+  
+      return sanityClient.fetch(query, {
+        slug,
+        categoryId,
+        tags,
+        language,
+        limit,
+      });
+    }
+  
+    if (hasCategory) {
+      const query = groq`
+        *[
+          _type == "blog" &&
+          slug.current != $slug &&
+          language == $language &&
+          category._ref == $categoryId
+        ]
+        | order(_createdAt desc)[0...${limit}]{
+          title,
+          slug,
+          coverImage,
+          excerpt,
+          category->{ title },
+          tags[]->{ title, slug }
+        }
+      `;
+  
+      return sanityClient.fetch(query, {
+        slug,
+        categoryId,
+        language,
+        limit,
+      });
+    }
+  
+    if (hasTags) {
+      const query = groq`
+        *[
+          _type == "blog" &&
+          slug.current != $slug &&
+          language == $language &&
+          count((tags[]->slug.current)[@ in $tags]) > 0
+        ]
+        | order(_createdAt desc)[0...${limit}]{
+          title,
+          slug,
+          coverImage,
+          excerpt,
+          category->{ title },
+          tags[]->{ title, slug }
+        }
+      `;
+  
+      return sanityClient.fetch(query, {
+        slug,
+        tags,
+        language,
+        limit,
+      });
+    }
+  
+    const query = groq`
+      *[
+        _type == "blog" &&
+        slug.current != $slug &&
+        language == $language
+      ]
+      | order(_createdAt desc)[0...${limit}]{
+        title,
+        slug,
+        coverImage,
+        excerpt,
+        category->{ title },
+        tags[]->{ title, slug }
+      }
+    `;
+  
+    return sanityClient.fetch(query, {
+      slug,
+      language,
+      limit,
+    });
+  };
+  
