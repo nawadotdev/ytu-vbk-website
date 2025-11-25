@@ -48,7 +48,7 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
           </div>
           <div className='flex items-center gap-2'>
             <p className='text-sm text-muted-foreground'>Paylaş:</p>
-            <ShareButtons />
+            <ShareButtons link={`/blog/${post.slug.current}`} />
           </div>
         </div>
       </div>
