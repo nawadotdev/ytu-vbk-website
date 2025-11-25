@@ -5,7 +5,6 @@ import { AvatarImage } from '@/components/ui/avatar';
 import { AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
-import React from 'react'
 import { PortableText } from 'next-sanity';
 import { portableComponents } from '@/components/Sanity/portableComponents';
 import Link from 'next/link';
