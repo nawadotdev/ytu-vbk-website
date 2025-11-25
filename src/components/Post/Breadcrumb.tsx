@@ -5,12 +5,12 @@ const PostBreadcrumb = async ({ title, groupName }: { title: string, groupName?:
     return (
         <Breadcrumb>
             <BreadcrumbList>
-                <BreadcrumbItem>
+                <BreadcrumbItem className='hover:underline'>
                     <Link href={"/"}>YTU VBK</Link>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 {groupName && (
-                    <BreadcrumbItem>
+                    <BreadcrumbItem className='hover:underline'>
                         <Link href={`/${groupName.toLowerCase()}`}>{groupName}</Link>
                     </BreadcrumbItem>
                 )}
