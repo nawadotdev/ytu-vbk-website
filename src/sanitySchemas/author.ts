@@ -1,32 +1,13 @@
-import { UserIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { defineType, defineField } from "sanity";
 
 export default defineType({
-  name: 'author',
-  title: 'Author',
-  icon: UserIcon,
-  type: 'document',
+  name: "author",
+  title: "Authors",
+  type: "document",
   fields: [
-    defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'picture',
-      title: 'Picture',
-      type: 'image',
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-          description: 'Important for SEO and accessiblity.',
-        },
-      ],
-      options: { hotspot: true },
-      validation: (rule) => rule.required(),
-    }),
+    defineField({ name: "name", title: "Name", type: "string" }),
+    defineField({ name: "title", title: "Title", type: "string" }),
+    defineField({ name: "avatar", title: "Avatar", type: "image", options: { hotspot: true } }),
+    defineField({ name: "bio", title: "Bio", type: "text" }),
   ],
-})
+});
