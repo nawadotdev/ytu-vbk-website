@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { PortableText } from 'next-sanity';
 import { portableComponents } from '@/components/Sanity/portableComponents';
 import Link from 'next/link';
+import ShareButtons from '@/components/Post/ShareButtons';
 
 const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
@@ -31,17 +32,23 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
           </p>
         )}
 
-        <div className="flex items-center gap-3 pt-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={sanityUrlFor(post.author?.avatar).url()} />
-            <AvatarFallback>{post.author?.name[0]}</AvatarFallback>
-          </Avatar>
+        <div className='flex justify-between'>
+          <div className="flex items-center gap-3 pt-3">
+            <Avatar className="h-10 w-10">
+              <AvatarImage src={sanityUrlFor(post.author?.avatar).url()} />
+              <AvatarFallback>{post.author?.name[0]}</AvatarFallback>
+            </Avatar>
 
-          <div>
-            <p className="font-medium">{post.author?.name}</p>
-            <p className="text-xs text-muted-foreground">
-              {new Date(post.publishedAt).toLocaleDateString("tr-TR")}
-            </p>
+            <div>
+              <p className="font-medium">{post.author?.name}</p>
+              <p className="text-xs text-muted-foreground">
+                {new Date(post.publishedAt).toLocaleDateString("tr-TR")}
+              </p>
+            </div>
+          </div>
+          <div className='flex items-center gap-2'>
+            <p className='text-sm text-muted-foreground'>Paylaş:</p>
+            <ShareButtons />
           </div>
         </div>
       </div>
