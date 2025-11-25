@@ -1,6 +1,6 @@
 import { ChevronDown, MenuIcon } from 'lucide-react'
 import Link from 'next/link'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 
@@ -66,10 +66,6 @@ export default function Navbar() {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end' className='md:hidden'>
-                        <DropdownMenuItem key="anasayfa">
-                            <NavItem label="Ana Sayfa" href="/" />
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
                         {NavItems.map((item) => (
                             <DropdownMenuItem key={item.href}>
                                 <NavItem label={item.label} href={item.href} />
