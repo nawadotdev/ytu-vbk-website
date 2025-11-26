@@ -1,8 +1,5 @@
 import { getEventBySlug, sanityUrlFor } from '@/lib/sanity';
 import { Badge } from '@/components/ui/badge';
-import { Avatar } from '@/components/ui/avatar';
-import { AvatarImage } from '@/components/ui/avatar';
-import { AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
 import { PortableText } from 'next-sanity';
@@ -12,7 +9,6 @@ import PostBreadcrumb from '@/components/Post/Breadcrumb';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { SanityEvent } from '@/types/SanityEvent.type';
-import { Card } from '@/components/ui/card';
 
 const language = "TR";
 
@@ -39,7 +35,7 @@ const SponsorCard = ({ sponsor }: { sponsor: SanityEvent['sponsors'][number] }) 
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const event = await getEventBySlug(slug);
+  const event = await getEventBySlug(slug, language);
 
   const mainDomain = process.env.NEXT_PUBLIC_MAIN_DOMAIN;
 
@@ -91,7 +87,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
-  const event = await getEventBySlug(slug);
+  const event = await getEventBySlug(slug, language);
 
   return (
     <div>
