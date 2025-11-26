@@ -3,7 +3,7 @@ import author from "./author";
 
 export const BlogCategory = defineType({
   name: "blogCategory",
-  title: "Blog Categories",
+  title: "Blog Kategorileri",
   type: "document",
   fields: [
     defineField({ name: "title", title: "Title", type: "string" }),
@@ -15,7 +15,7 @@ export const BlogCategory = defineType({
 
 export const Blog = defineType({
   name: "blog",
-  title: "Blog Posts",
+  title: "Bloglar",
   type: "document",
   fields: [
     defineField({

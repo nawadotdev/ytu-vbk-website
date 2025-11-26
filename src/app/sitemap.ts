@@ -1,6 +1,7 @@
 import { getBlogsForSitemap } from '@/lib/sanity';
 import type { MetadataRoute } from 'next'
 import { SanityBlog } from '@/types/SanityBlog.type';
+import { SanityEvent } from '@/types/SanityEvent.type';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_MAIN_DOMAIN?.replace(/\/$/, "");
@@ -10,12 +11,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/hakkimizda',
     '/etkinlikler',
     '/egitimler',
-    '/blog',
+    '/bloglar',
     '/mezun-portfoyu',
     '/iletisim',
   ];
 
   const blogs = await getBlogsForSitemap();
+  const events = await getEventsForSitemap();
 
   const staticPages = routes.map((route) => ({
     url: `${baseUrl}${route}`,
@@ -31,5 +33,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...blogPages];
+  const eventPages = events.map((event: { slug: { current: string }, publishedAt: string }) => ({
+    url: `${baseUrl}/etkinlik/${event.slug.current}`,
+    lastModified: event.publishedAt ? new Date(event.publishedAt) : new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...blogPages, ...eventPages];
 }

@@ -139,7 +139,7 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   return (
     <div>
       <div className="max-w-4xl mx-auto px-4 py-12 space-y-10">
-        <PostBreadcrumb title={post.title} groupName="Blog" />
+        <PostBreadcrumb title={post.title} groupName="Bloglar" />
         <div className="space-y-4">
           <Badge variant="secondary" className="text-sm">
             {post.category.title}

@@ -4,19 +4,19 @@ import imageUrlBuilder from "@sanity/image-url";
 import { Image } from "sanity";
 
 export const sanityClient = createClient({
-    projectId: "otmr34tv",
-    dataset: "production",
-    apiVersion: "2025-11-25",
-    useCdn: true,
+  projectId: "otmr34tv",
+  dataset: "production",
+  apiVersion: "2025-11-25",
+  useCdn: true,
 });
 
 export function sanityUrlFor(source: Image) {
-    return imageUrlBuilder(sanityClient).image(source);
+  return imageUrlBuilder(sanityClient).image(source);
 }
 
 export const getBlogBySlug = async (slug: string) => {
 
-    const query = groq`
+  const query = groq`
         *[_type == "blog" && slug.current == $slug][0] {
             _id,
             title,
@@ -40,13 +40,13 @@ export const getBlogBySlug = async (slug: string) => {
             language,
         }`;
 
-    const blog = await sanityClient.fetch(query, { slug });
-    return blog;
+  const blog = await sanityClient.fetch(query, { slug });
+  return blog;
 
 }
 
 export const getBlogs = async (language: string) => {
-    const query = groq`
+  const query = groq`
         *[_type == "blog" && language == $language] | order(publishedAt desc) {
             _id,
             title,
@@ -68,22 +68,22 @@ export const getBlogs = async (language: string) => {
             tags,
             language,
         }`;
-    const blogs = await sanityClient.fetch(query, { language });
-    return blogs;
+  const blogs = await sanityClient.fetch(query, { language });
+  return blogs;
 }
 
 export const getMoreBlogs = async (
-    language: string,
-    slug: string,
-    categoryId?: string,
-    tags?: string[],
-    limit: number = 4
-  ) => {
-    const hasCategory = Boolean(categoryId);
-    const hasTags = tags && tags.length > 0;
-  
-    if (hasCategory && hasTags) {
-      const query = groq`
+  language: string,
+  slug: string,
+  categoryId?: string,
+  tags?: string[],
+  limit: number = 4
+) => {
+  const hasCategory = Boolean(categoryId);
+  const hasTags = tags && tags.length > 0;
+
+  if (hasCategory && hasTags) {
+    const query = groq`
         *[
           _type == "blog" &&
           slug.current != $slug &&
@@ -108,18 +108,18 @@ export const getMoreBlogs = async (
           tags[]->{ title, slug }
         }
       `;
-  
-      return sanityClient.fetch(query, {
-        slug,
-        categoryId,
-        tags,
-        language,
-        limit,
-      });
-    }
-  
-    if (hasCategory) {
-      const query = groq`
+
+    return sanityClient.fetch(query, {
+      slug,
+      categoryId,
+      tags,
+      language,
+      limit,
+    });
+  }
+
+  if (hasCategory) {
+    const query = groq`
         *[
           _type == "blog" &&
           slug.current != $slug &&
@@ -136,17 +136,17 @@ export const getMoreBlogs = async (
           tags[]->{ title, slug }
         }
       `;
-  
-      return sanityClient.fetch(query, {
-        slug,
-        categoryId,
-        language,
-        limit,
-      });
-    }
-  
-    if (hasTags) {
-      const query = groq`
+
+    return sanityClient.fetch(query, {
+      slug,
+      categoryId,
+      language,
+      limit,
+    });
+  }
+
+  if (hasTags) {
+    const query = groq`
         *[
           _type == "blog" &&
           slug.current != $slug &&
@@ -163,16 +163,16 @@ export const getMoreBlogs = async (
           tags[]->{ title, slug }
         }
       `;
-  
-      return sanityClient.fetch(query, {
-        slug,
-        tags,
-        language,
-        limit,
-      });
-    }
-  
-    const query = groq`
+
+    return sanityClient.fetch(query, {
+      slug,
+      tags,
+      language,
+      limit,
+    });
+  }
+
+  const query = groq`
       *[
         _type == "blog" &&
         slug.current != $slug &&
@@ -188,20 +188,117 @@ export const getMoreBlogs = async (
         tags[]->{ title, slug }
       }
     `;
-  
-    return sanityClient.fetch(query, {
-      slug,
-      language,
-      limit,
-    });
-  };
 
-  export const getBlogsForSitemap = async () => {
-    const query = groq`
+  return sanityClient.fetch(query, {
+    slug,
+    language,
+    limit,
+  });
+};
+
+export const getBlogsForSitemap = async () => {
+  const query = groq`
       *[_type == "blog"] {
         slug,
         publishedAt
       }
     `;
-    return sanityClient.fetch(query);
-  };
+  return sanityClient.fetch(query);
+};
+
+export const getEvents = async (language: string) => {
+  const query = groq`
+    {
+      "active": *[
+        _type == "event" &&
+        language == $language &&
+        startDate <= now() &&
+        endDate > now()
+      ] | order(startDate asc) {
+        _id,
+        title,
+        slug,
+        description,
+        coverImage,
+        startDate,
+        endDate,
+        location,
+        tags,
+        language,
+        sponsors,
+        content
+      },
+
+      "upcoming": *[
+        _type == "event" &&
+        language == $language &&
+        startDate > now()
+      ] | order(startDate asc) {
+        _id,
+        title,
+        slug,
+        description,
+        coverImage,
+        startDate,
+        endDate,
+        location,
+        tags,
+        language,
+        sponsors,
+        content
+      },
+
+      "past": *[
+        _type == "event" &&
+        language == $language &&
+        endDate <= now()
+      ] | order(endDate desc) {
+        _id,
+        title,
+        slug,
+        description,
+        coverImage,
+        startDate,
+        endDate,
+        location,
+        tags,
+        language,
+        sponsors,
+        content
+      }
+    }
+  `;
+
+  const events = await sanityClient.fetch(query, { language });
+  return events;
+};
+
+export const getEventBySlug = async (slug: string) => {
+  const query = groq`
+    *[_type == "event" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      description,
+      coverImage,
+      startDate,
+      endDate,
+      location,
+      tags,
+      language,
+      sponsors,
+      content
+    }
+  `;
+  return sanityClient.fetch(query, { slug });
+};
+
+export const getEventsForSitemap = async () => {
+  const query = groq`
+    *[_type == "event"] {
+      slug,
+      publishedAt
+    }
+  `;
+  return sanityClient.fetch(query);
+};
