@@ -1,7 +1,5 @@
-import { getBlogsForSitemap } from '@/lib/sanity';
+import { getBlogsForSitemap, getEventsForSitemap } from '@/lib/sanity';
 import type { MetadataRoute } from 'next'
-import { SanityBlog } from '@/types/SanityBlog.type';
-import { SanityEvent } from '@/types/SanityEvent.type';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_MAIN_DOMAIN?.replace(/\/$/, "");
@@ -26,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1 : 0.7,
   }));
 
-  const blogPages = blogs.map((post: SanityBlog) => ({
+  const blogPages = blogs.map((post: { slug: { current: string }, publishedAt: string }) => ({
     url: `${baseUrl}/blog/${post.slug.current}`,
     lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
     changeFrequency: 'weekly',
