@@ -166,7 +166,7 @@ const BlogSection = () => {
             VBK Blog, veri bilimi meraklıları için ilham verici içerikler sunarken, kulüp üyelerinin yazma ve sunum becerilerini geliştirmelerine de olanak sağlar.
           </p>
           <p>
-            Tüm blog yazılarını görmek için <Link href="/blog" className="underline">blog sayfasını</Link> ziyaret edin.
+            Tüm blog yazılarını görmek için <Link href="/bloglar" className="underline">blog sayfasını</Link> ziyaret edin.
           </p>
         </div>
       </div>
