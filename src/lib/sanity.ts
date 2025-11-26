@@ -273,9 +273,9 @@ export const getEvents = async (language: string) => {
   return events;
 };
 
-export const getEventBySlug = async (slug: string) => {
+export const getEventBySlug = async (slug: string, language: string) => {
   const query = groq`
-    *[_type == "event" && slug.current == $slug][0] {
+    *[_type == "event" && slug.current == $slug && language == $language][0] {
       _id,
       title,
       slug,
@@ -290,7 +290,7 @@ export const getEventBySlug = async (slug: string) => {
       content
     }
   `;
-  return sanityClient.fetch(query, { slug });
+  return sanityClient.fetch(query, { slug, language });
 };
 
 export const getEventsForSitemap = async () => {
