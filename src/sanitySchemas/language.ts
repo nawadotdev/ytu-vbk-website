@@ -1,15 +1,14 @@
 import { defineField } from "sanity"
 
 export default defineField({
-    name: "language",
-    title: "Dil",
-    type: "string",
-    validation: (Rule) => Rule.required(),
-    options: {
+  name: "language",
+  title: "Dil",
+  type: "string",
+  options: {
       list: [
-        { title: "Türkçe", value: "TR" },
-        { title: "İngilizce", value: "EN" },
+          { title: "Türkçe", value: "TR" },
+          { title: "İngilizce", value: "EN" },
       ],
-      layout: "radio",
-    }
+  },
+  validation: (Rule) => Rule.required(),
 })

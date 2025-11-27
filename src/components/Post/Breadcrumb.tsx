@@ -2,6 +2,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from 
 import Link from 'next/link';
 
 const PostBreadcrumb = async ({ title, groupName }: { title: string, groupName?: string }) => {
+    const validGroupName = groupName?.replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c').toLowerCase();
     return (
         <Breadcrumb>
             <BreadcrumbList>
@@ -11,7 +12,7 @@ const PostBreadcrumb = async ({ title, groupName }: { title: string, groupName?:
                 <BreadcrumbSeparator />
                 {groupName && (
                     <BreadcrumbItem className='hover:underline'>
-                        <Link href={`/${groupName.toLowerCase()}`}>{groupName}</Link>
+                        <Link href={`/${validGroupName}`}>{groupName}</Link>
                     </BreadcrumbItem>
                 )}
                 <BreadcrumbSeparator />

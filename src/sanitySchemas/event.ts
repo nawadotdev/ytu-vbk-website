@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import language from "./language";
 
 export default defineType({
   name: "event",
@@ -64,19 +65,7 @@ export default defineType({
       options: { layout: "tags" },
     }),
 
-    defineField({
-      name: "language",
-      title: "Dil",
-      type: "string",
-      options: {
-        list: [
-          { title: "Türkçe", value: "TR" },
-          { title: "İngilizce", value: "EN" },
-        ],
-        layout: "radio",
-      },
-      validation: (Rule) => Rule.required(),
-    }),
+    language,
 
     defineField({
       name: "sponsors",

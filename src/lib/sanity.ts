@@ -45,7 +45,7 @@ export const getBlogBySlug = async (slug: string) => {
 
 }
 
-export const getBlogs = async (language: string) => {
+export const getBlogs = async (language: "TR" | "EN") => {
   const query = groq`
         *[_type == "blog" && language == $language] | order(publishedAt desc) {
             _id,
@@ -296,6 +296,96 @@ export const getEventBySlug = async (slug: string, language: string) => {
 export const getEventsForSitemap = async () => {
   const query = groq`
     *[_type == "event"] {
+      slug,
+      publishedAt
+    }
+  `;
+  return sanityClient.fetch(query);
+};
+
+export const getCourses = async (language: string) => {
+
+  const query = groq`
+    {
+      "active": *[_type == "course" && language == $language && startDate <= now() && endDate > now()] | order(startDate asc) {
+        _id,
+        title,
+        slug,
+        description,
+        coverImage,
+        startDate,
+        endDate,
+        lecturer -> {
+          name,
+          title,
+          avatar,
+          bio,
+        },
+        language,
+      },
+      "upcoming": *[_type == "course" && language == $language && startDate > now()] | order(startDate asc) {
+        _id,
+        title,
+        slug,
+        description,
+        coverImage,
+        startDate,
+        endDate,
+        lecturer -> {
+          name,
+          title,
+          avatar,
+          bio,
+        },
+        language,
+      },
+      "past": *[_type == "course" && language == $language && endDate <= now()] | order(endDate desc) {
+        _id,
+        title,
+        slug,
+        description,
+        coverImage,
+        startDate,
+        endDate,
+        lecturer -> {
+          name,
+          title,
+          avatar,
+          bio,
+        },
+        language,
+      }
+    }
+  `;
+  return sanityClient.fetch(query, { language });
+};
+
+export const getCourseBySlug = async (slug: string, language: string) => {
+  const query = groq`
+    *[_type == "course" && slug.current == $slug && language == $language][0] {
+      _id,
+      title,
+      slug,
+      description,
+      coverImage,
+      startDate,
+      endDate,
+      lecturer -> {
+        name,
+        title,
+        avatar,
+        bio,
+      },
+      language,
+      content
+    }
+  `;
+  return sanityClient.fetch(query, { slug, language });
+};
+
+export const getCoursesForSitemap = async () => {
+  const query = groq`
+    *[_type == "course"] {
       slug,
       publishedAt
     }
