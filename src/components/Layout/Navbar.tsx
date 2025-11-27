@@ -9,7 +9,7 @@ const NavItems: { label: string, href: string }[] = [
     { label: "Etkinlikler", href: "/etkinlikler" },
     { label: "Eğitimler", href: "/egitimler" },
     { label: "Mezun Portföyü", href: "/mezun-portfoyu" },
-    { label: "Blog", href: "/blog" },
+    { label: "Bloglar", href: "/bloglar" },
     { label: "Hakkımızda", href: "/hakkimizda" },
     { label: "İletişim", href: "/iletisim" },
 ]

@@ -36,13 +36,13 @@ const BlogCard = ({ blog }: { blog: SanityBlog }) => {
 const BlogListPage = async () => {
     const blogs = await getBlogs(language);
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4 max-w-7xl mx-auto'>
-            {blogs.map((blog: SanityBlog) => (
-                <BlogCard key={blog._id} blog={blog} />
-            ))}
-            {blogs.map((blog: SanityBlog) => (
-                <BlogCard key={blog._id} blog={blog} />
-            ))}
+        <div className='max-w-7xl mx-auto'>
+            <h1 className='text-2xl font-bold'>Bloglar</h1>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4 max-w-7xl mx-auto'>
+                {blogs.map((blog: SanityBlog) => (
+                    <BlogCard key={blog._id} blog={blog} />
+                ))}
+            </div>
         </div>
     )
 }

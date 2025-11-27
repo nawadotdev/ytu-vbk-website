@@ -1,5 +1,6 @@
 import { defineType, defineField } from "sanity";
 import author from "./author";
+import language from "./language";
 
 export const BlogCategory = defineType({
   name: "blogCategory",
@@ -33,54 +34,48 @@ export const Blog = defineType({
     }),
     defineField({
       name: "category",
-      title: "Category",
+      title: "Kategori",
       type: "reference",
       to: [BlogCategory],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "excerpt",
-      title: "Excerpt",
+      title: "Kısa Açıklama",
       type: "text",
       rows: 3,
     }),
     defineField({
       name: "coverImage",
-      title: "Cover Image",
+      title: "Kapak Görseli",
       type: "image",
       options: { hotspot: true },
     }),
     defineField({
       name: "author",
-      title: "Author",
+      title: "Yazar",
       type: "reference",
       to: [author],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "tags",
-      title: "Tags",
+      title: "Etiketler",
       type: "array",
       of: [{ type: "string" }],
       options: { layout: "tags" },
     }),
     defineField({
       name: "content",
-      title: "Content",
+      title: "İçerik",
       type: "array",
       of: [{ type: "block" }, { type: "image" }],
     }),
     defineField({
       name: "publishedAt",
-      title: "Published At",
+      title: "Yayınlanma Tarihi",
       type: "datetime",
     }),
-    defineField({
-      name: "language",
-      title: "Language",
-      type: "string",
-      options: { list: ["Tr", "En"] },
-      validation: (Rule) => Rule.required(),
-    }),
+    language
   ],
 });
