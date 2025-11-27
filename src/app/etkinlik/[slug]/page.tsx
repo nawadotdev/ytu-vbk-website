@@ -36,7 +36,12 @@ const SponsorCard = ({ sponsor }: { sponsor: SanityEvent['sponsors'][number] }) 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const event = await getEventBySlug(slug, language);
-
+  if (!event) {
+    return {
+      title: "Etkinlik bulunamadı",
+      description: "Etkinlik bulunamadı",
+    };
+  }
   const mainDomain = process.env.NEXT_PUBLIC_MAIN_DOMAIN;
 
   const imageUrl = sanityUrlFor(event.coverImage).width(1600).height(840).quality(80).auto('format').url();
@@ -88,6 +93,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 const EventPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const event = await getEventBySlug(slug, language);
+
+  if (!event) {
+    return <div className='max-w-7xl mx-auto px-4 py-12 space-y-10 text-center'>Etkinlik bulunamadı</div>;
+  }
 
   return (
     <div>

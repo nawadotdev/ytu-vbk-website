@@ -20,6 +20,12 @@ export const revalidate = 60;
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getBlogBySlug(slug);
+  if (!post) {
+    return {
+      title: "Blog bulunamadı",
+      description: "Blog bulunamadı",
+    };
+  }
 
   const mainDomain = process.env.NEXT_PUBLIC_MAIN_DOMAIN;
 
@@ -133,6 +139,10 @@ const SuggestedBlogs = async ({ post }: { post: SanityBlog }) => {
 const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const post = await getBlogBySlug(slug);
+  console.log(post);
+  if (!post) {
+    return <div className='max-w-7xl mx-auto px-4 py-12 space-y-10 text-center'>Blog bulunamadı</div>;
+  }
 
   const { minutes } = calculateReadingTime(post.content);
 
