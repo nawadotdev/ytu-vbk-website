@@ -1,6 +1,7 @@
 import { defineType, defineField } from "sanity";
 import author from "./author";
 import language from "./language";
+import slugify from "slugify";
 
 export const BlogCategory = defineType({
   name: "blogCategory",
@@ -29,7 +30,31 @@ export const Blog = defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "title", maxLength: 100 },
+      options: {
+        source: "title",
+        slugify: (input) => {
+          const turkishCharMap: Record<string, string> = {
+            "ö": "o",
+            "Ö": "o",
+            "ü": "u",
+            "Ü": "u",
+            "ğ": "g",
+            "Ğ": "g",
+            "ş": "s",
+            "Ş": "s",
+            "ı": "i",
+            "İ": "i",
+            "ç": "c",
+            "Ç": "c",
+          };
+          const normalizedInput = input.replace(/[öÖüÜğĞşŞıİçÇ]/g, (char) => turkishCharMap[char] || char);
+          return slugify(normalizedInput, {
+            lower: true,
+            strict: true,
+            trim: true,
+          });
+        }
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
