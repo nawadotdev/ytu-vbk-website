@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import language from "./language";
+import { slugify } from "@/lib/utils";
 
 export default defineType({
     name: "graduate",
@@ -15,7 +16,7 @@ export default defineType({
             name: "slug",
             title: "Slug",
             type: "slug",
-            options: { source: "name", maxLength: 120 },
+            options: { source: "name", maxLength: 120, slugify: (input) => slugify(input) },
         }),
         defineField({
             name: "image",

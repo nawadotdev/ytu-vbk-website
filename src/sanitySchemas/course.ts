@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 import author from "./author";
 import language from "./language";
+import { slugify } from "@/lib/utils";
 
 export default defineType({
     name: "course",
@@ -17,7 +18,7 @@ export default defineType({
             name: "slug",
             title: "Slug",
             type: "slug",
-            options: { source: "title" },
+            options: { source: "title", slugify: (input) => slugify(input) },
             validation: (Rule) => Rule.required(),
         }),
         defineField({

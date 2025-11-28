@@ -1,7 +1,7 @@
 import { defineType, defineField } from "sanity";
 import author from "./author";
 import language from "./language";
-import slugify from "slugify";
+import { slugify } from "@/lib/utils";
 
 export const BlogCategory = defineType({
   name: "blogCategory",
@@ -9,11 +9,10 @@ export const BlogCategory = defineType({
   type: "document",
   fields: [
     defineField({ name: "title", title: "Title", type: "string" }),
-    defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" } }),
+    defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title", slugify: (input) => slugify(input) } }),
     defineField({ name: "description", title: "Description", type: "text" }),
   ],
 });
-
 
 export const Blog = defineType({
   name: "blog",
@@ -32,28 +31,7 @@ export const Blog = defineType({
       type: "slug",
       options: {
         source: "title",
-        slugify: (input) => {
-          const turkishCharMap: Record<string, string> = {
-            "ö": "o",
-            "Ö": "o",
-            "ü": "u",
-            "Ü": "u",
-            "ğ": "g",
-            "Ğ": "g",
-            "ş": "s",
-            "Ş": "s",
-            "ı": "i",
-            "İ": "i",
-            "ç": "c",
-            "Ç": "c",
-          };
-          const normalizedInput = input.replace(/[öÖüÜğĞşŞıİçÇ]/g, (char) => turkishCharMap[char] || char);
-          return slugify(normalizedInput, {
-            lower: true,
-            strict: true,
-            trim: true,
-          });
-        }
+        slugify: (input) => slugify(input),
       },
       validation: (Rule) => Rule.required(),
     }),

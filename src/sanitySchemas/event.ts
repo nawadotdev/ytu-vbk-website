@@ -1,5 +1,6 @@
 import { defineType, defineField } from "sanity";
 import language from "./language";
+import { slugify } from "@/lib/utils";
 
 export default defineType({
   name: "event",
@@ -17,7 +18,7 @@ export default defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "title", maxLength: 120 },
+      options: { source: "title", maxLength: 120, slugify: (input) => slugify(input) },
       validation: (Rule) => Rule.required(),
     }),
 

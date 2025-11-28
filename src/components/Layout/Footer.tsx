@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Linkedin, Youtube, Twitter, Mail, MapPin, Globe } from "lucide-react";
+import { Instagram, Linkedin, Youtube, Twitter, Mail, MapPin } from "lucide-react";
 
 const quickLinks: { label: string; href: string }[] = [
   { label: "Hakkımızda", href: "/hakkimizda" },

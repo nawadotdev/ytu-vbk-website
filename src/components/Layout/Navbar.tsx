@@ -1,4 +1,4 @@
-import { ChevronDown, MenuIcon } from 'lucide-react'
+import { MenuIcon } from 'lucide-react'
 import Link from 'next/link'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
@@ -50,7 +50,7 @@ export default function Navbar() {
                 ))}
             </div>
             <div>
-                
+
             </div>
             <div className='block md:hidden'>
                 <DropdownMenu>

@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { PortableTextBlock } from "next-sanity";
+import _slugify from "slugify";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -25,4 +26,27 @@ export function degreeConverter(degree: string, language: "TR" | "EN") {
     return degree.replace("Ph.D.", "Doktora").replace("M.Sc.", "Yüksek Lisans").replace("B.Sc.", "Lisans").replace("B.A.", "Ön Lisans");
   }
   return degree.replace("Ph.D.", "Ph.D.").replace("M.Sc.", "M.Sc.").replace("B.Sc.", "B.Sc.").replace("B.A.", "B.A.");
+}
+
+export function slugify(input: string) {
+  const turkishCharMap: Record<string, string> = {
+    "ö": "o",
+    "Ö": "o",
+    "ü": "u",
+    "Ü": "u",
+    "ğ": "g",
+    "Ğ": "g",
+    "ş": "s",
+    "Ş": "s",
+    "ı": "i",
+    "İ": "i",
+    "ç": "c",
+    "Ç": "c",
+  };
+  const normalizedInput = input.replace(/[öÖüÜğĞşŞıİçÇ]/g, (char) => turkishCharMap[char] || char);
+  return _slugify(normalizedInput, {
+    lower: true,
+    strict: true,
+    trim: true,
+  });
 }
