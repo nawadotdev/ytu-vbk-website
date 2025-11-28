@@ -19,3 +19,10 @@ export function calculateReadingTime(content: PortableTextBlock[]) {
 export function formatDate(date: string, format: Intl.DateTimeFormatOptions = { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) {
   return new Date(date).toLocaleDateString("tr-TR", format);
 }
+
+export function degreeConverter(degree: string, language: "TR" | "EN") {
+  if (language === "TR") {
+    return degree.replace("Ph.D.", "Doktora").replace("M.Sc.", "Yüksek Lisans").replace("B.Sc.", "Lisans").replace("B.A.", "Ön Lisans");
+  }
+  return degree.replace("Ph.D.", "Ph.D.").replace("M.Sc.", "M.Sc.").replace("B.Sc.", "B.Sc.").replace("B.A.", "B.A.");
+}

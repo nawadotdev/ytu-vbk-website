@@ -1,4 +1,4 @@
-import { getBlogsForSitemap, getCoursesForSitemap, getEventsForSitemap } from '@/lib/sanity';
+import { getBlogsForSitemap, getCoursesForSitemap, getEventsForSitemap, getGraduatesForSitemap } from '@/lib/sanity';
 import type { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogs = await getBlogsForSitemap();
   const events = await getEventsForSitemap();
   const courses = await getCoursesForSitemap();
+  const graduates = await getGraduatesForSitemap();
   
   const staticPages = routes.map((route) => ({
     url: `${baseUrl}${route}`,
@@ -46,5 +47,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...blogPages, ...eventPages, ...coursePages];
+  const graduatePages = graduates.map((graduate: { slug: { current: string }, publishedAt: string }) => ({
+    url: `${baseUrl}/mezun/${graduate.slug.current}`,
+    lastModified: graduate.publishedAt ? new Date(graduate.publishedAt) : new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...blogPages, ...eventPages, ...coursePages, ...graduatePages];
 }

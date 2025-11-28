@@ -62,16 +62,19 @@ const EventCard = ({ event, type }: { event: SanityEvent, type: 'active' | 'past
 const EventListPage = async () => {
     const { active, past, upcoming } = await getEvents(language);
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4 max-w-7xl mx-auto'>
-            {active.map((event: SanityEvent) => (
-                <EventCard key={event._id} event={event} type="active" />
-            ))}
-            {past.map((event: SanityEvent) => (
-                <EventCard key={event._id} event={event} type="past" />
-            ))}
-            {upcoming.map((event: SanityEvent) => (
-                <EventCard key={event._id} event={event} type="upcoming" />
-            ))}
+        <div className='max-w-7xl mx-auto'>
+            <h1 className='text-2xl font-bold'>Etkinlikler</h1>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-4 max-w-7xl mx-auto'>
+                {active.map((event: SanityEvent) => (
+                    <EventCard key={event._id} event={event} type="active" />
+                ))}
+                {past.map((event: SanityEvent) => (
+                    <EventCard key={event._id} event={event} type="past" />
+                ))}
+                {upcoming.map((event: SanityEvent) => (
+                    <EventCard key={event._id} event={event} type="upcoming" />
+                ))}
+            </div>
         </div>
     )
 }

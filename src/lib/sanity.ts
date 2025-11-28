@@ -392,3 +392,56 @@ export const getCoursesForSitemap = async () => {
   `;
   return sanityClient.fetch(query);
 };
+
+export const getGraduates = async (language: "TR" | "EN") => {
+  const query = groq`
+    *[_type == "graduate" && language == $language] | order(_createdAt desc) {
+      _id,
+      name,
+      slug,
+      image,
+      description,
+      education,
+      experience,
+      skills,
+      languages,
+      projects,
+      content,
+      language,
+    }
+  `;
+  return sanityClient.fetch(query, { language });
+};
+
+export const getGraduateBySlug = async (slug: string, language: "TR" | "EN") => {
+  const query = groq`
+    *[_type == "graduate" && slug.current == $slug && language == $language][0] {
+      _id,
+      name,
+      slug,
+      image,
+      description,
+      education, 
+      experience,
+      skills,
+      languages,
+      projects,
+      content,
+      language,
+      content,
+      _createdAt,
+      _updatedAt,
+    }
+  `;
+  return sanityClient.fetch(query, { slug, language });
+};
+
+export const getGraduatesForSitemap = async () => {
+  const query = groq`
+    *[_type == "graduate"] {
+      slug,
+      publishedAt
+    }
+  `;
+  return sanityClient.fetch(query);
+};
