@@ -49,14 +49,8 @@ export default function Navbar() {
                     <NavItem key={item.href} label={item.label} href={item.href} />
                 ))}
             </div>
-            {/* language selector */}
-            <div className="hidden items-center gap-1 md:block">
-                <DropdownMenu>
-                    <DropdownMenuTrigger className="flex items-center gap-1 hover:underline transition-all duration-300 cursor-pointer  ">
-                        <p>Türkçe</p>
-                        <ChevronDown className="w-4 h-4" />
-                    </DropdownMenuTrigger>
-                </DropdownMenu>
+            <div>
+                
             </div>
             <div className='block md:hidden'>
                 <DropdownMenu>

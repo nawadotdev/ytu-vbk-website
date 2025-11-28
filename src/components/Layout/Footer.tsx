@@ -94,18 +94,6 @@ export default function Footer() {
                   </div>
                 </div>
               </li>
-              <li className="flex items-start justify-center sm:justify-start gap-2">
-                <Globe className="mt-0.5 h-4 w-4 text-muted-foreground shrink-0" />
-                <div className="flex items-center gap-2">
-                  <Link href="/tr" className="font-medium hover:underline" hrefLang="tr">
-                    Türkçe
-                  </Link>
-                  <span className="text-muted-foreground">/</span>
-                  <Link href="/en" className="font-medium hover:underline" hrefLang="en">
-                    English
-                  </Link>
-                </div>
-              </li>
             </ul>
           </div>
         </div>
