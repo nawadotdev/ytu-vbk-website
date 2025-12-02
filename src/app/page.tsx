@@ -8,6 +8,7 @@ import BlogCarousel from '@/components/Home/BlogCarousel'
 import TeamCarousel from '@/components/Home/TeamCarousel'
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { Separator } from '@/components/ui/separator'
 
 export const metadata: Metadata = {
   title: "Veri Bilimi | YTÜ VBK",
@@ -233,11 +234,15 @@ const Home = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(site) }} />
       <HeroSection />
       <TeamImageSection />
-      <AboutSection />
-      <EventsSection />
-      <EducationSection />
-      <BlogSection />
-      <TeamSection />
+        <AboutSection />
+        <Separator className='max-w-[70vw] mx-auto' />
+        <EventsSection />
+        <Separator className='max-w-[70vw] mx-auto' />
+        <EducationSection />
+        <Separator className='max-w-[70vw] mx-auto' />
+        <BlogSection />
+        <Separator className='max-w-[70vw] mx-auto' />
+        <TeamSection />
     </div>
   )
 }
